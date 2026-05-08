@@ -5,6 +5,7 @@
 This repository currently contains the Forge One charter as a Markdown-first project.
 
 - `Charter-of-ForgeOne.md`: canonical bilingual charter for Forge One.
+- `DESIGN.md`: machine-readable and human-readable design system for the landing page.
 - `AGENTS.md`: contributor and agent operating guide.
 - `.git/`: repository metadata; do not edit directly.
 
@@ -17,6 +18,7 @@ There is no package manager or build system configured yet. Use these commands f
 - `git status`: inspect local changes before editing.
 - `git diff -- Charter-of-ForgeOne.md AGENTS.md`: review document changes.
 - `sed -n '1,160p' Charter-of-ForgeOne.md`: preview document structure in the terminal.
+- `npm run design:lint`: validate `DESIGN.md` structure and tokens.
 
 When adding tooling, commit the manifest and document the exact commands here, for example `npm test`, `pnpm lint`, or `make build`.
 
@@ -39,3 +41,5 @@ Pull requests should include a short summary, the reason for the change, affecte
 ## Agent-Specific Instructions
 
 Treat the charter as the source of truth for project philosophy. Keep edits narrow, preserve organizational memory, and document any new workflow or automation so future human and AI contributors can replay the decision context.
+
+Before changing visual style, read `DESIGN.md` and keep `styles.css` aligned with its tokens, tone, and component guidance. Do not introduce dominant black backgrounds, purple gradients, decorative orbs, or generic SaaS styling.
