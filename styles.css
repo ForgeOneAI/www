@@ -1084,8 +1084,9 @@ h3 {
 
 .foundry-scrim {
   background:
-    linear-gradient(180deg, rgba(238, 243, 248, 0.96) 0%, rgba(238, 243, 248, 0.7) 42%, rgba(238, 243, 248, 0.95) 100%),
-    linear-gradient(90deg, rgba(238, 243, 248, 0.98) 0%, rgba(238, 243, 248, 0.68) 48%, rgba(238, 243, 248, 0.28) 100%);
+    radial-gradient(circle at 78% 58%, rgba(245, 158, 11, 0.18), transparent 26rem),
+    linear-gradient(180deg, rgba(238, 243, 248, 0.96) 0%, rgba(238, 243, 248, 0.68) 42%, rgba(238, 243, 248, 0.95) 100%),
+    linear-gradient(90deg, rgba(238, 243, 248, 0.98) 0%, rgba(238, 243, 248, 0.7) 48%, rgba(238, 243, 248, 0.32) 100%);
 }
 
 .foundry-scene .section-inner {
@@ -1096,39 +1097,65 @@ h3 {
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
-  padding: 10px 0;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid rgba(216, 224, 234, 0.92);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.48)),
+    rgba(255, 255, 255, 0.52);
+  box-shadow: 0 28px 90px rgba(11, 42, 117, 0.08);
+  backdrop-filter: blur(18px);
 }
 
 .pipeline::before {
   position: absolute;
-  top: 50px;
-  right: 7%;
-  left: 7%;
-  height: 2px;
+  inset: 18px;
+  background:
+    linear-gradient(90deg, rgba(20, 87, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(20, 87, 255, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  content: "";
+}
+
+.pipeline-beam {
+  position: absolute;
+  top: 50%;
+  right: 44px;
+  left: 44px;
+  z-index: 0;
+  height: 3px;
   background: linear-gradient(90deg, var(--primary), var(--secondary), var(--tertiary), var(--primary));
   background-size: 220% 100%;
-  content: "";
-  animation: flow-line 8s linear infinite;
+  box-shadow: 0 0 40px rgba(20, 87, 255, 0.24);
+  transform: translateY(-50%);
+  animation: flow-line 6s linear infinite;
 }
 
 .pipeline-step {
   position: relative;
+  z-index: 1;
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 30px;
-  min-height: 290px;
-  padding: 0 24px 0 0;
+  gap: 18px;
+  min-height: 300px;
+  padding: 18px;
+  border: 1px solid rgba(216, 224, 234, 0.9);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.58)),
+    rgba(255, 255, 255, 0.56);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
 .pipeline-step strong {
   display: grid;
-  width: 82px;
-  height: 82px;
+  width: 62px;
+  height: 62px;
   place-items: center;
-  margin: 0 0 26px;
   border: 1px solid var(--line);
-  border-radius: 50%;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.92);
   color: var(--primary);
   box-shadow: 0 14px 40px rgba(20, 87, 255, 0.12);
@@ -1138,12 +1165,29 @@ h3 {
 
 .pipeline-step:hover strong {
   box-shadow: 0 18px 54px rgba(20, 87, 255, 0.18);
-  transform: translateY(-5px);
+}
+
+.pipeline-step:hover {
+  border-color: rgba(20, 87, 255, 0.24);
+  box-shadow: 0 28px 80px rgba(20, 87, 255, 0.12);
+  transform: translateY(-6px);
 }
 
 .pipeline-step div {
-  padding: 26px 26px 26px 0;
-  border-top: 1px solid var(--line);
+  display: grid;
+  align-content: end;
+  min-height: 170px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(216, 224, 234, 0.9);
+}
+
+.pipeline-step div > span {
+  margin-bottom: 12px;
+  color: var(--secondary);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .pipeline-step:nth-child(even) strong {
@@ -1702,27 +1746,35 @@ footer a:hover {
   }
 
   .pipeline {
-    gap: 20px;
+    gap: 12px;
+    padding: 14px;
   }
 
   .pipeline::before {
-    top: 0;
-    bottom: 0;
-    left: 41px;
-    width: 2px;
+    inset: 14px;
+  }
+
+  .pipeline-beam {
+    top: 28px;
+    bottom: 28px;
+    left: 45px;
+    width: 3px;
     height: auto;
-    background: linear-gradient(180deg, var(--primary), var(--secondary), var(--tertiary));
+    transform: none;
+    background: linear-gradient(180deg, var(--primary), var(--secondary), var(--tertiary), var(--primary));
   }
 
   .pipeline-step {
-    grid-template-columns: 82px 1fr;
+    grid-template-columns: 70px 1fr;
     grid-template-rows: auto;
     gap: 18px;
-    padding: 0;
+    min-height: auto;
+    padding: 14px;
   }
 
   .pipeline-step div {
-    padding: 18px 0 30px;
+    min-height: auto;
+    padding: 6px 0;
     border-top: 0;
   }
 
