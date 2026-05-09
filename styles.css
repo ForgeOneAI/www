@@ -221,7 +221,7 @@ h3 {
 }
 
 .hero-copy {
-  max-width: 650px;
+  max-width: 980px;
   color: #334155;
   font-size: clamp(1.18rem, 2vw, 1.45rem);
   font-weight: 500;
@@ -534,6 +534,157 @@ h3 {
 .pipeline p,
 .governance-engine p {
   color: var(--muted);
+}
+
+.structure-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 70% 20%, rgba(20, 87, 255, 0.13), transparent 28rem),
+    radial-gradient(circle at 18% 78%, rgba(19, 184, 166, 0.14), transparent 24rem),
+    linear-gradient(180deg, #ffffff 0%, var(--surface-soft) 100%);
+  border-block: 1px solid var(--line);
+}
+
+.structure-section::before {
+  position: absolute;
+  inset: 8% 6%;
+  border: 1px solid rgba(20, 87, 255, 0.12);
+  background:
+    linear-gradient(90deg, rgba(20, 87, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(20, 87, 255, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 44%, black, transparent 72%);
+  content: "";
+}
+
+.structure-inner {
+  position: relative;
+}
+
+.structure-map {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.structure-map::before,
+.structure-map::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(64vw, 760px);
+  height: min(64vw, 760px);
+  border: 1px solid rgba(20, 87, 255, 0.18);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  pointer-events: none;
+}
+
+.structure-map::after {
+  width: min(42vw, 500px);
+  height: min(42vw, 500px);
+  border-color: rgba(19, 184, 166, 0.24);
+}
+
+.structure-layer {
+  position: relative;
+  z-index: 1;
+  min-height: 300px;
+  padding: 28px;
+  border: 1px solid rgba(216, 224, 234, 0.92);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 24px 80px rgba(11, 42, 117, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.structure-layer > span {
+  display: inline-block;
+  margin-bottom: 42px;
+  color: var(--tertiary);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.structure-layer p {
+  color: var(--muted);
+}
+
+.structure-layer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 22px 0 0;
+  list-style: none;
+}
+
+.structure-layer li {
+  padding: 7px 10px;
+  border: 1px solid rgba(216, 224, 234, 0.9);
+  border-radius: 4px;
+  background: rgba(246, 248, 251, 0.76);
+  color: var(--primary-dark);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.human-layer {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  background:
+    linear-gradient(145deg, rgba(20, 87, 255, 0.09), transparent 45%),
+    rgba(255, 255, 255, 0.88);
+}
+
+.agent-layer {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.workflow-layer {
+  grid-column: 2 / span 2;
+  grid-row: 2;
+  min-height: 230px;
+  margin-left: 130px;
+  background:
+    linear-gradient(130deg, rgba(245, 158, 11, 0.11), transparent 42%),
+    rgba(255, 255, 255, 0.88);
+}
+
+.structure-core {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 220px;
+  height: 220px;
+  place-items: center;
+  justify-self: center;
+  border: 1px solid rgba(20, 87, 255, 0.22);
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 30px 90px rgba(20, 87, 255, 0.28);
+}
+
+.structure-core span {
+  align-self: end;
+  font-size: 1.34rem;
+  font-weight: 900;
+}
+
+.structure-core small {
+  align-self: start;
+  max-width: 130px;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .incubator {
@@ -963,6 +1114,7 @@ footer a:hover {
   .split,
   .culture,
   .principle-system,
+  .structure-map,
   .pipeline,
   .product-inner {
     grid-template-columns: 1fr;
@@ -986,6 +1138,32 @@ footer a:hover {
   .principle-node:nth-child(4):hover,
   .principle-node:nth-child(5):hover {
     transform: none;
+  }
+
+  .structure-map {
+    grid-template-rows: auto;
+  }
+
+  .structure-map::before,
+  .structure-map::after {
+    width: 86vw;
+    height: 86vw;
+  }
+
+  .structure-layer,
+  .human-layer,
+  .agent-layer,
+  .workflow-layer {
+    grid-column: auto;
+    grid-row: auto;
+    min-height: auto;
+    margin-left: 0;
+  }
+
+  .structure-core {
+    order: -1;
+    width: 168px;
+    height: 168px;
   }
 
   .principle-system::before {
