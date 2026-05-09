@@ -543,7 +543,7 @@ h3 {
   font-size: clamp(2.7rem, 5.4vw, 5.6rem);
 }
 
-.mission-copy p {
+.mission-copy p:not(.eyebrow) {
   max-width: 720px;
   color: #334155;
   font-size: clamp(1.16rem, 1.8vw, 1.45rem);
