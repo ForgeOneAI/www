@@ -436,7 +436,7 @@ h3 {
 .principle-system {
   position: relative;
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr 1fr;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -484,11 +484,31 @@ h3 {
   content: "";
 }
 
-.node-large {
-  grid-row: span 2;
-  min-height: 360px;
+.node-anchor {
+  grid-column: span 2;
+  min-height: 320px;
   background:
     linear-gradient(160deg, rgba(20, 87, 255, 0.12), transparent 48%),
+    var(--surface);
+}
+
+.principle-node:not(.node-anchor) {
+  grid-column: span 2;
+}
+
+.principle-node:nth-child(4),
+.principle-node:nth-child(5) {
+  transform: translateY(-34px);
+}
+
+.principle-node:nth-child(4):hover,
+.principle-node:nth-child(5):hover {
+  transform: translateY(-38px);
+}
+
+.principle-node:nth-child(6) {
+  background:
+    linear-gradient(120deg, rgba(245, 158, 11, 0.12), transparent 42%),
     var(--surface);
 }
 
@@ -953,12 +973,19 @@ footer a:hover {
   }
 
   .principle-node,
-  .node-large,
+  .node-anchor,
   .node-wide,
   .pipeline-step {
     grid-column: auto;
     grid-row: auto;
     min-height: auto;
+  }
+
+  .principle-node:nth-child(4),
+  .principle-node:nth-child(5),
+  .principle-node:nth-child(4):hover,
+  .principle-node:nth-child(5):hover {
+    transform: none;
   }
 
   .principle-system::before {
