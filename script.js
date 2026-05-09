@@ -38,7 +38,10 @@ function resizeCanvas() {
 function drawFlow(time) {
   if (!canvas || !ctx) return;
   ctx.clearRect(0, 0, width, height);
-  const scroll = window.scrollY * 0.0015;
+  const pageScroll = document.body.classList.contains("landing-page")
+    ? document.querySelector("main").scrollTop
+    : window.scrollY;
+  const scroll = pageScroll * 0.0015;
   const px = pointer.x * width;
   const py = pointer.y * height;
 
@@ -108,6 +111,88 @@ document.querySelectorAll(".menu-toggle").forEach((button) => {
     });
   });
 });
+
+const landingScroller = document.body.classList.contains("landing-page") ? document.querySelector("main") : null;
+const landingPanels = landingScroller ? Array.from(document.querySelectorAll("main > section, footer")) : [];
+let isPaging = false;
+let pagingTimer;
+
+function nearestPanelIndex() {
+  if (!landingScroller || !landingPanels.length) return 0;
+  const scrollTop = landingScroller.scrollTop;
+  return landingPanels.reduce((nearest, panel, index) => {
+    const currentDistance = Math.abs(panel.offsetTop - scrollTop);
+    const nearestDistance = Math.abs(landingPanels[nearest].offsetTop - scrollTop);
+    return currentDistance < nearestDistance ? index : nearest;
+  }, 0);
+}
+
+function scrollToPanel(index) {
+  if (!landingScroller || !landingPanels.length) return;
+  const nextIndex = Math.max(0, Math.min(index, landingPanels.length - 1));
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  isPaging = true;
+  landingPanels[nextIndex].scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+  clearTimeout(pagingTimer);
+  pagingTimer = setTimeout(() => {
+    isPaging = false;
+  }, reduceMotion ? 120 : 780);
+}
+
+function jumpToPanel(index) {
+  if (!landingScroller || !landingPanels.length) return;
+  const nextIndex = Math.max(0, Math.min(index, landingPanels.length - 1));
+  landingScroller.scrollTo({ top: landingPanels[nextIndex].offsetTop, behavior: "auto" });
+}
+
+function panelIndexFromHash(hash) {
+  if (hash === "#top") return 0;
+  const target = hash ? document.querySelector(hash) : null;
+  return landingPanels.indexOf(target);
+}
+
+if (landingScroller && landingPanels.length) {
+  const initialIndex = panelIndexFromHash(window.location.hash);
+  if (initialIndex >= 0) {
+    requestAnimationFrame(() => jumpToPanel(initialIndex));
+    window.addEventListener("load", () => jumpToPanel(initialIndex));
+    setTimeout(() => jumpToPanel(initialIndex), 160);
+  }
+
+  window.addEventListener(
+    "wheel",
+    (event) => {
+      if (event.ctrlKey || Math.abs(event.deltaY) < 18 || isPaging) return;
+      event.preventDefault();
+      scrollToPanel(nearestPanelIndex() + (event.deltaY > 0 ? 1 : -1));
+    },
+    { passive: false },
+  );
+
+  window.addEventListener("keydown", (event) => {
+    const target = event.target;
+    const isTyping =
+      target instanceof HTMLElement && ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName);
+    if (isTyping || event.metaKey || event.ctrlKey || event.altKey) return;
+
+    const forwardKeys = ["ArrowDown", "PageDown", " "];
+    const backKeys = ["ArrowUp", "PageUp"];
+    if (![...forwardKeys, ...backKeys].includes(event.key) || isPaging) return;
+    event.preventDefault();
+    scrollToPanel(nearestPanelIndex() + (forwardKeys.includes(event.key) ? 1 : -1));
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+      const targetIndex = panelIndexFromHash(href);
+      if (targetIndex === -1) return;
+      event.preventDefault();
+      history.pushState(null, "", href);
+      scrollToPanel(targetIndex);
+    });
+  });
+}
 
 renderIcons();
 

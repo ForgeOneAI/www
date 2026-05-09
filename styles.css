@@ -20,6 +20,23 @@ html {
   scroll-behavior: smooth;
 }
 
+html.landing-page-root {
+  height: 100%;
+  overflow: hidden;
+}
+
+html.landing-page-root body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.landing-page main {
+  height: 100svh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+}
+
 [id] {
   scroll-margin-top: 104px;
 }
@@ -32,6 +49,34 @@ body {
   color: var(--text);
   font-family: Inter, "Noto Sans SC", system-ui, sans-serif;
   line-height: 1.6;
+}
+
+.landing-page {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+.landing-page main > section,
+.landing-page footer {
+  min-height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.landing-page footer {
+  display: grid;
+  place-content: center;
+}
+
+.landing-page main > section:not(.hero):not(.immersive) {
+  display: grid;
+  align-content: center;
+  align-items: center;
+}
+
+.landing-page main > section.section-inner {
+  padding-top: max(88px, 10svh);
+  padding-bottom: max(56px, 8svh);
 }
 
 .flow-canvas {
@@ -49,6 +94,7 @@ body > *:not(.flow-canvas) {
 }
 
 body > .site-header {
+  position: fixed;
   z-index: 30;
 }
 
@@ -534,6 +580,27 @@ h3 {
 .pipeline p,
 .governance-engine p {
   color: var(--muted);
+}
+
+.landing-page #principles .section-heading {
+  margin-bottom: 28px;
+}
+
+.landing-page #principles .principle-system {
+  gap: 14px;
+}
+
+.landing-page #principles .principle-node {
+  min-height: 210px;
+  padding: 24px;
+}
+
+.landing-page #principles .node-anchor {
+  min-height: 260px;
+}
+
+.landing-page #principles .principle-node span {
+  margin-bottom: 32px;
 }
 
 .structure-section {
