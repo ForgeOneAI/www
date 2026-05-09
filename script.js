@@ -114,6 +114,7 @@ document.querySelectorAll(".menu-toggle").forEach((button) => {
 
 const landingScroller = document.body.classList.contains("landing-page") ? document.querySelector("main") : null;
 const landingPanels = landingScroller ? Array.from(document.querySelectorAll("main > section, footer")) : [];
+const desktopPagingQuery = window.matchMedia("(min-width: 901px)");
 let isPaging = false;
 let pagingTimer;
 
@@ -156,7 +157,7 @@ function panelIndexFromHash(hash) {
 
 if (landingScroller && landingPanels.length) {
   const initialIndex = panelIndexFromHash(window.location.hash);
-  if (initialIndex >= 0) {
+  if (initialIndex >= 0 && desktopPagingQuery.matches) {
     requestAnimationFrame(() => jumpToPanel(initialIndex));
     window.addEventListener("load", () => jumpToPanel(initialIndex));
     setTimeout(() => jumpToPanel(initialIndex), 160);
@@ -165,6 +166,7 @@ if (landingScroller && landingPanels.length) {
   window.addEventListener(
     "wheel",
     (event) => {
+      if (!desktopPagingQuery.matches) return;
       if (event.ctrlKey || Math.abs(event.deltaY) < 18 || isPaging) return;
       event.preventDefault();
       scrollToPanel(nearestPanelIndex() + (event.deltaY > 0 ? 1 : -1));
@@ -173,6 +175,7 @@ if (landingScroller && landingPanels.length) {
   );
 
   window.addEventListener("keydown", (event) => {
+    if (!desktopPagingQuery.matches) return;
     const target = event.target;
     const isTyping =
       target instanceof HTMLElement && ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName);
@@ -187,6 +190,7 @@ if (landingScroller && landingPanels.length) {
 
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (event) => {
+      if (!desktopPagingQuery.matches) return;
       const href = link.getAttribute("href");
       const targetIndex = panelIndexFromHash(href);
       if (targetIndex === -1) return;

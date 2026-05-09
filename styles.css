@@ -1729,6 +1729,29 @@ footer a:hover {
 }
 
 @media (max-width: 900px) {
+  html.landing-page-root,
+  html.landing-page-root body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .landing-page main {
+    height: auto;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .landing-page main > section,
+  .landing-page footer {
+    min-height: auto;
+    scroll-snap-align: none;
+  }
+
+  .landing-page main > section {
+    padding-top: 92px;
+    padding-bottom: 72px;
+  }
+
   .site-header {
     grid-template-columns: 1fr auto;
     height: 64px;
