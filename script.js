@@ -5,6 +5,15 @@ let width = 0;
 let height = 0;
 let particles = [];
 
+function renderIcons() {
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function setMenuIcon(button, icon, label) {
+  button.innerHTML = `<i data-lucide="${icon}" aria-hidden="true"></i><span class="sr-only">${label}</span>`;
+  renderIcons();
+}
+
 function resizeCanvas() {
   if (!canvas || !ctx) return;
   const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -89,14 +98,18 @@ document.querySelectorAll(".menu-toggle").forEach((button) => {
   button.addEventListener("click", () => {
     const isOpen = header.classList.toggle("nav-open");
     button.setAttribute("aria-expanded", String(isOpen));
+    setMenuIcon(button, isOpen ? "x" : "menu", isOpen ? "关闭菜单" : "打开菜单");
   });
   nav?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       header.classList.remove("nav-open");
       button.setAttribute("aria-expanded", "false");
+      setMenuIcon(button, "menu", "打开菜单");
     });
   });
 });
+
+renderIcons();
 
 if (canvas && ctx) {
   resizeCanvas();
