@@ -1,4 +1,4 @@
-# Forge One · 铸坊  
+# Forge One · 铸方  
 ## AI Native 孵化器宪章
 
 > Charter of an AI-Native Incubator
@@ -20,7 +20,7 @@
 传统公司的结构，建立在人类是唯一生产主体的前提之上。  
 而这个前提，正在失效。
 
-因此，**Forge One（铸坊）** 不只是一个孵化器。
+因此，**Forge One（铸方）** 不只是一个孵化器。
 
 我们更希望探索：
 
@@ -451,5 +451,5 @@ Forge One 不只是一个 AI 孵化器。
 
 ---
 
-**Forge One · 铸坊**  
+**Forge One · 铸方**  
 **Charter of an AI-Native Incubator**
