@@ -17,12 +17,18 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <canvas class="flow-canvas" aria-hidden="true"></canvas>
     <header class="site-header" aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="Forge One home">
         <span class="brand-mark">F1</span>
         <span>Forge One · 铸坊</span>
       </a>
-      <nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="primary-nav">
         <a href="#principles">原则</a>
         <a href="#incubator">孵化器</a>
         <a href="#governance">治理</a>
@@ -45,13 +51,18 @@
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#incubator">进入孵化系统</a>
-            <a class="button secondary" href="Charter-of-ForgeOne.md">阅读完整宪章</a>
+            <a class="button secondary" href="charter.html">阅读完整宪章</a>
           </div>
         </div>
         <div class="hero-signal" aria-label="Organization model">
           <span>Human Core</span>
           <span>Agent Workforce</span>
           <span>Autonomous Infrastructure</span>
+        </div>
+        <div class="hero-orbit" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </section>
 
@@ -64,6 +75,25 @@
           <p>
             Forge One 不只是创造 AI 产品。它把人类判断、多智能体执行、自动化工作流和组织记忆放在同一个系统中，形成可持续演化的 AI Native Organization。
           </p>
+        </div>
+      </section>
+
+      <section class="immersive flow-scene reveal-section">
+        <img src="assets/agent-flow.png" alt="" class="scene-image" />
+        <div class="scene-scrim"></div>
+        <div class="scene-copy">
+          <p class="eyebrow">Live Intelligence Flow</p>
+          <h2>进入一个正在运行的 AI 组织神经系统</h2>
+          <p>
+            任务、决策、记忆和评审在智能体之间流动。人类不再管理每一个动作，而是设计系统如何感知、判断、执行和复盘。
+          </p>
+        </div>
+        <div class="telemetry-rail" aria-hidden="true">
+          <span>Research</span>
+          <span>Build</span>
+          <span>Review</span>
+          <span>Deploy</span>
+          <span>Learn</span>
         </div>
       </section>
 
@@ -96,7 +126,9 @@
         </div>
       </section>
 
-      <section class="incubator section-band" id="incubator">
+      <section class="incubator immersive foundry-scene" id="incubator">
+        <img src="assets/incubator-foundry.png" alt="" class="scene-image" />
+        <div class="scene-scrim foundry-scrim"></div>
         <div class="section-inner">
           <div class="section-heading">
             <p class="eyebrow">Incubation System</p>
@@ -160,7 +192,7 @@
         </div>
       </section>
 
-      <section class="product">
+      <section class="product immersive product-scene reveal-section">
         <div class="section-inner product-inner">
           <div class="product-copy">
             <p class="eyebrow">Product Philosophy</p>
@@ -195,7 +227,8 @@
 
     <footer>
       <p>Forge One · 铸坊</p>
-      <a href="Charter-of-ForgeOne.md">Charter of an AI-Native Incubator</a>
+      <a href="charter.html">Charter of an AI-Native Incubator</a>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>
