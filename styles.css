@@ -33,6 +33,7 @@ html.landing-page-root body {
 .landing-page main {
   height: 100svh;
   overflow-y: auto;
+  scroll-padding-top: 0;
   scroll-snap-type: y mandatory;
   overscroll-behavior-y: contain;
 }
@@ -59,6 +60,7 @@ body {
 .landing-page main > section,
 .landing-page footer {
   min-height: 100svh;
+  scroll-margin-top: 0;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }

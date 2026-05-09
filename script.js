@@ -132,7 +132,10 @@ function scrollToPanel(index) {
   const nextIndex = Math.max(0, Math.min(index, landingPanels.length - 1));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   isPaging = true;
-  landingPanels[nextIndex].scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+  landingScroller.scrollTo({
+    top: landingPanels[nextIndex].offsetTop,
+    behavior: reduceMotion ? "auto" : "smooth",
+  });
   clearTimeout(pagingTimer);
   pagingTimer = setTimeout(() => {
     isPaging = false;
