@@ -201,7 +201,7 @@ h1 span {
 }
 
 h1 span + span {
-  margin-top: 0.08em;
+  margin-top: 0.14em;
 }
 
 h2 {
@@ -801,7 +801,7 @@ footer a:hover {
 .charter-shell {
   width: min(920px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 150px 0 80px;
+  padding: 104px 0 80px;
 }
 
 .charter-document {
@@ -1098,7 +1098,7 @@ footer a:hover {
   }
 
   h1 span + span {
-    margin-top: 0.16em;
+    margin-top: 0.24em;
   }
 
   .hero-actions,
