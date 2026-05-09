@@ -721,8 +721,9 @@ h3 {
 
 .scene-scrim {
   background:
-    linear-gradient(90deg, rgba(246, 248, 251, 0.98) 0%, rgba(246, 248, 251, 0.82) 38%, rgba(246, 248, 251, 0.32) 100%),
-    linear-gradient(180deg, rgba(246, 248, 251, 0.12), rgba(246, 248, 251, 0.96));
+    radial-gradient(circle at 76% 62%, rgba(20, 87, 255, 0.16), transparent 24rem),
+    linear-gradient(90deg, rgba(246, 248, 251, 0.98) 0%, rgba(246, 248, 251, 0.82) 38%, rgba(246, 248, 251, 0.36) 100%),
+    linear-gradient(180deg, rgba(246, 248, 251, 0.08), rgba(246, 248, 251, 0.95));
 }
 
 .scene-copy {
@@ -743,33 +744,70 @@ h3 {
   font-size: clamp(1.08rem, 1.6vw, 1.35rem);
 }
 
-.telemetry-rail {
+.flow-track {
   position: absolute;
-  right: clamp(18px, 5vw, 78px);
-  bottom: clamp(28px, 8vh, 92px);
+  right: clamp(20px, 6vw, 88px);
+  bottom: clamp(48px, 11vh, 110px);
+  left: clamp(20px, 6vw, 88px);
+  z-index: 2;
   display: grid;
-  gap: 10px;
-  min-width: min(360px, calc(100% - 40px));
-}
-
-.telemetry-rail span {
-  display: flex;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
   align-items: center;
-  min-height: 46px;
-  padding: 0 16px;
-  border: 1px solid rgba(216, 224, 234, 0.9);
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--primary-dark);
-  font-weight: 800;
-  backdrop-filter: blur(16px);
-  transform: translateX(calc(var(--i, 0) * 10px));
 }
 
-.telemetry-rail span:nth-child(1) { --i: 0; }
-.telemetry-rail span:nth-child(2) { --i: 1; }
-.telemetry-rail span:nth-child(3) { --i: 2; }
-.telemetry-rail span:nth-child(4) { --i: 3; }
-.telemetry-rail span:nth-child(5) { --i: 4; }
+.flow-line {
+  position: absolute;
+  top: 50%;
+  right: 7%;
+  left: 7%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), var(--tertiary), transparent);
+  background-size: 220% 100%;
+  transform: translateY(-50%);
+  animation: flow-line 4.8s linear infinite;
+}
+
+.flow-track span {
+  position: relative;
+  display: grid;
+  min-height: 92px;
+  align-content: center;
+  gap: 6px;
+  padding: 16px 18px 16px 46px;
+  border: 1px solid rgba(216, 224, 234, 0.72);
+  border-radius: 999px 8px 8px 999px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.42)),
+    rgba(255, 255, 255, 0.48);
+  color: var(--primary-dark);
+  box-shadow: 0 20px 70px rgba(11, 42, 117, 0.06);
+  backdrop-filter: blur(16px);
+  transform: translateY(calc((var(--i) % 2) * -20px));
+}
+
+.flow-track span::before {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--secondary);
+  box-shadow: 0 0 0 9px rgba(19, 184, 166, 0.12), 0 0 34px rgba(20, 87, 255, 0.34);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.flow-track strong {
+  font-size: 1rem;
+}
+
+.flow-track small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
 
 .intro-grid,
 .split,
@@ -1751,15 +1789,40 @@ footer a:hover {
     font-size: clamp(2.4rem, 12vw, 4.4rem);
   }
 
-  .telemetry-rail {
+  .flow-track {
     position: relative;
     right: auto;
     bottom: auto;
-    width: min(100% - 32px, 520px);
+    left: auto;
+    width: min(100% - 32px, 760px);
     margin: 24px auto 0;
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
-  .telemetry-rail span {
+  .flow-line {
+    top: 0;
+    bottom: 0;
+    left: 24px;
+    width: 2px;
+    height: auto;
+    transform: none;
+    background: linear-gradient(180deg, var(--primary), var(--secondary), var(--tertiary));
+  }
+
+  .flow-track span {
+    grid-template-columns: 34px 1fr;
+    min-height: 58px;
+    align-content: center;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 8px;
+    transform: none;
+  }
+
+  .flow-track span::before {
+    position: static;
+    grid-row: span 2;
     transform: none;
   }
 }
